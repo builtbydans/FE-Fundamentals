@@ -1,16 +1,21 @@
-const colors = ["green", "red", "rgba(133,122,200)", "#f15025"];
+const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C",
+"D", "E", "F"];
 
 const btn = document.getElementById('btn');
 const color = document.querySelector('.color');
 
 btn.addEventListener('click', () => {
-  const randomNum = getRandomNumber();
-  console.log(randomNum);
-
-  document.body.style.backgroundColor = colors[randomNum];
-  color.textContent = colors[randomNum];
+  document.body.style.backgroundColor = getHexCode();
+  color.textContent = getHexCode();
 });
 
-const getRandomNumber = () => {
-  return Math.floor(Math.random() * colors.length);
+const getHexCode = () => {
+  let hexCode = "#";
+
+  for (let i = 0; i < 6; i++) {
+    let random = hex[Math.floor(Math.random() * hex.length)];
+    hexCode += random;
+  };
+
+  return hexCode;
 };
