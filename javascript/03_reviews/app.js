@@ -30,7 +30,7 @@ const reviews = [
   },
 ];
 
-// select items
+// select <items></items>
 const img = document.getElementById('person-img');
 const author = document.getElementById('author');
 const job = document.getElementById('job');
@@ -40,16 +40,37 @@ const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 const randomBtn = document.querySelector('.random-btn');
 
+// Set starting item
+let currentItem = 0;
 
-// Mapping through Reviews data and applying styles
-const mapReview = () => {
-  reviews.map(review => {
-    author.textContent = review.name;
-    job.textContent = review.job;
-    info.textContent = review.text;
-  });
-}
+// Load initial item
+window.addEventListener('DOMContentLoaded', () => {
+  showPerson(currentItem);
+});
 
+// Show person based on Item
+const showPerson = person => {
+  const item = reviews[person];
+  img.src = item.img;
+  author.textContent = item.name;
+  job.textContent = item.job;
+  info.textContent = item.text;
+};
+
+// show next review
+nextBtn.addEventListener('click', () => {
+  currentItem++;
+  if (currentItem == reviews.length) {
+    currentItem = 0;
+  }
+  showPerson(currentItem);
+});
+
+// show previous review
 prevBtn.addEventListener('click', () => {
-  mapReview();
-})
+  currentItem--;
+  if (currentItem < 0) {
+    currentItem = reviews.length - 1;
+  }
+  showPerson(currentItem);
+});
